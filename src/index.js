@@ -5,4 +5,4 @@ const App = () => <h1>Hello, World!</h1>
 
 const appEl = document.getElementById("app")
 
-render(appEl, <App />)
+render(<App />, appEl)
