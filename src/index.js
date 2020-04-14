@@ -3,6 +3,6 @@ import { render } from "react-dom"
 
 const App = () => <h1>Hello, World!</h1>
 
-const rootEl = document.getElementById("root")
+const appEl = document.getElementById("app")
 
-render(rootEl, <App />)
+render(appEl, <App />)
