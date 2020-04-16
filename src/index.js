@@ -1,7 +1,9 @@
 import React from "react"
 import { render } from "react-dom"
 
-const App = () => <h1>Hello, World!</h1>
+import DepthChart from "./modules/depthchart"
+
+const App = () => <DepthChart />
 
 const appEl = document.getElementById("app")
 
