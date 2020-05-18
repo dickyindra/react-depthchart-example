@@ -13,7 +13,6 @@ import { scaleLinear } from "d3-scale"
 import { curveStep } from "d3-shape"
 import PropTypes from "prop-types"
 
-import data from "./data.json"
 import { tooltipContent } from ".//helpers/tooltip"
 
 const buyColor = "#008069"
@@ -32,7 +31,7 @@ const sellGradient = createVerticalLinearGradient([
     { stop: 0, color: hexToRGBA(sellColor, 1) },
 ])
 
-const DepthChart = ({ width, height }) => {
+const DepthChart = ({ width, height, data }) => {
     const xAccessor = (d) => d.price
 
     const start = xAccessor(last(data))
@@ -139,6 +138,14 @@ const DepthChart = ({ width, height }) => {
 }
 
 DepthChart.propTypes = {
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            price: PropTypes.number.isRequired,
+            volume: PropTypes.number.isRequired,
+            totalVolume: PropTypes.number.isRequired,
+            type: PropTypes.oneOf(["buy", "sell"]),
+        })
+    ).isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 }
