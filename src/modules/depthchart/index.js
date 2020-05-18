@@ -6,6 +6,7 @@ import { AreaSeries } from "react-stockcharts/lib/series"
 import { HoverTooltip } from "react-stockcharts/lib/tooltip"
 import { CurrentCoordinate } from "react-stockcharts/lib/coordinates"
 import { createVerticalLinearGradient, hexToRGBA, last } from "react-stockcharts/lib/utils"
+import CrossHairCursor from "react-stockcharts/lib/coordinates/CrossHairCursor"
 import { scaleLinear } from "d3-scale"
 import { curveStep } from "d3-shape"
 
@@ -110,6 +111,7 @@ const DepthChart = () => {
                             fontFamily={"inherit"}
                         />
                         <CurrentCoordinate yAccessor={(d) => d.totalVolume} fill={"#2196F3"} r={5} onHover />
+                        <CrossHairCursor strokeDasharray='ShortDash' stroke={"#2196F3"} opacity={1} />
                     </Chart>
                 </ChartCanvas>
             )}
