@@ -5,8 +5,7 @@ import { XAxis, YAxis } from "react-stockcharts/lib/axes"
 import { AreaSeries } from "react-stockcharts/lib/series"
 import { HoverTooltip } from "react-stockcharts/lib/tooltip"
 import { CurrentCoordinate } from "react-stockcharts/lib/coordinates"
-import { createVerticalLinearGradient, hexToRGBA } from "react-stockcharts/lib/utils"
-import { last } from "react-stockcharts/lib/utils"
+import { createVerticalLinearGradient, hexToRGBA, last } from "react-stockcharts/lib/utils"
 import { scaleLinear } from "d3-scale"
 import { curveStep } from "d3-shape"
 
@@ -40,7 +39,18 @@ const DepthChart = () => {
 
     const xExtents = [start, end]
 
-    const margin = { left: 5, right: 0, top: 5, bottom: 30 }
+    const margin = { left: 30, right: 0, top: 5, bottom: 30 }
+    const gridWidth = width - margin.left - margin.right
+
+    const showGrid = true
+    const yGrid = showGrid
+        ? {
+              innerTickSize: -1 * gridWidth,
+              tickStrokeDasharray: "Solid",
+              tickStrokeOpacity: 0.2,
+              tickStrokeWidth: 1,
+          }
+        : {}
 
     return (
         <TypeChooser>
@@ -61,6 +71,18 @@ const DepthChart = () => {
                     displayXAccessor={(d) => d.price}
                 >
                     <Chart id={1} yExtents={(d) => [0, d.totalVolume + d.totalVolume / 4]}>
+                        <XAxis axisAt='bottom' orient='bottom' tickStroke={textColor} ticks={5} strokeWidth={1} stroke={lineColor} />
+                        <YAxis
+                            axisAt={"left"}
+                            fontSize={10}
+                            orient='left'
+                            ticks={5}
+                            yZoomWidth={0}
+                            showDomain={false}
+                            tickStroke={textColor}
+                            stroke={lineColor}
+                            {...yGrid}
+                        />
                         <AreaSeries
                             yAccessor={(d) => (d.type == "buy" ? d.totalVolume : undefined)}
                             fill={`url(${buyColor})`}
@@ -88,17 +110,6 @@ const DepthChart = () => {
                             fontFamily={"inherit"}
                         />
                         <CurrentCoordinate yAccessor={(d) => d.totalVolume} fill={"#2196F3"} r={5} onHover />
-                        <XAxis axisAt='bottom' orient='bottom' tickStroke={textColor} ticks={5} strokeWidth={1} stroke={lineColor} />
-                        <YAxis
-                            axisAt={"left"}
-                            fontSize={10}
-                            orient='right'
-                            ticks={5}
-                            yZoomWidth={0}
-                            showDomain={false}
-                            tickStroke={textColor}
-                            stroke={lineColor}
-                        />
                     </Chart>
                 </ChartCanvas>
             )}
