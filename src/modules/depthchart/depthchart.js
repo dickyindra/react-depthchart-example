@@ -11,6 +11,7 @@ import MouseCoordinateY from "react-stockcharts/lib/coordinates/MouseCoordinateY
 import CrossHairCursor from "react-stockcharts/lib/coordinates/CrossHairCursor"
 import { scaleLinear } from "d3-scale"
 import { curveStep } from "d3-shape"
+import PropTypes from "prop-types"
 
 import data from "./data.json"
 import { tooltipContent } from ".//helpers/tooltip"
@@ -31,10 +32,7 @@ const sellGradient = createVerticalLinearGradient([
     { stop: 0, color: hexToRGBA(sellColor, 1) },
 ])
 
-const DepthChart = () => {
-    const width = 1280
-    const height = 360
-
+const DepthChart = ({ width, height }) => {
     const xAccessor = (d) => d.price
 
     const start = xAccessor(last(data))
@@ -138,6 +136,11 @@ const DepthChart = () => {
             )}
         </TypeChooser>
     )
+}
+
+DepthChart.propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
 }
 
 export default DepthChart

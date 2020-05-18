@@ -2,7 +2,7 @@ import React from "react"
 import DepthChart from "./depthchart"
 
 const DepthChartModule = () => {
-    return <DepthChart />
+    return <DepthChart width={1280} height={360} />
 }
 
 export default DepthChartModule
