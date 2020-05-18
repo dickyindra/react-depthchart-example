@@ -1,10 +1,10 @@
 export const tooltipContent = () => {
     return ({ currentItem, xAccessor }) => {
         return {
-            x: xAccessor(currentItem),
+            x: `Price: ${xAccessor(currentItem)}`,
             y: [
                 {
-                    label: "Volume",
+                    label: "Total Volume",
                     value: currentItem.volume,
                 },
                 {
